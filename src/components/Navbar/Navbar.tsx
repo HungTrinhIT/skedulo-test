@@ -1,6 +1,6 @@
 const Navbar = () => {
   return (
-    <header className='py-5 px-5 flex items-center justify-between bg-[#333] text-white'>
+    <header className='py-5 px-5 flex items-center justify-between bg-gray-700 text-white'>
       <h6 className='tracking-[2px]'>GITHUB FINDER</h6>
       <nav className='flex list-none gap-5'>
         <li>

@@ -10,10 +10,11 @@ type GithubUserCardProps = {
 
 const GithubUserCard = (props: GithubUserCardProps) => {
   const {
-    data: { login, avatar_url },
+    data: { login, avatar_url, type, score },
     className,
   } = props;
 
+  console.log('🚀 ~ GithubUserCard ~  type, score :', type, score);
   const classes = classNames(
     'max-w-sm p-4 border border-gray-200 rounded shadow hover:shadow-black/25 transition-all md:p-6 dark:border-gray-700 flex flex-col items-center justify-center',
     className

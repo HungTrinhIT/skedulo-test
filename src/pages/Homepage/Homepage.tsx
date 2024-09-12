@@ -6,7 +6,7 @@ const Homepage = () => {
   return (
     <PageLayout className='pt-10'>
       <SearchUserForm />
-      <ManageUserList />
+      <ManageUserList className='mt-8' />
     </PageLayout>
   );
 };

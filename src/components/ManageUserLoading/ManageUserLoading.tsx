@@ -1,3 +1,9 @@
+const LOADING_CARD_COUNT = 16;
+const LOADING_CARDS: number[] = Array.from(
+  { length: LOADING_CARD_COUNT },
+  (_, index) => index + 1
+);
+
 const GithubUserCardSkeleton = () => {
   return (
     <div
@@ -18,4 +24,14 @@ const GithubUserCardSkeleton = () => {
   );
 };
 
-export default GithubUserCardSkeleton;
+const ManageUserLoading = () => {
+  return (
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4'>
+      {LOADING_CARDS.map(() => (
+        <GithubUserCardSkeleton />
+      ))}
+    </div>
+  );
+};
+
+export default ManageUserLoading;
