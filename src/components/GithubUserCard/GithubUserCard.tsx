@@ -10,7 +10,7 @@ type GithubUserCardProps = {
 
 const GithubUserCard = (props: GithubUserCardProps) => {
   const {
-    data: { id, login, avatar_url, score, type },
+    data: { login, avatar_url },
     className,
   } = props;
 

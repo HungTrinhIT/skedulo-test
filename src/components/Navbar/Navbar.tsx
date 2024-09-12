@@ -1,5 +1,3 @@
-import React from 'react';
-
 const Navbar = () => {
   return (
     <header className='py-5 px-5 flex items-center justify-between bg-[#333] text-white'>
