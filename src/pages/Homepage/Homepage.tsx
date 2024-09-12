@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import api from '../../config/api';
 
