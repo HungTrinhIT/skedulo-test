@@ -42,6 +42,7 @@ const githubUserSlice = createSlice({
                 ...state,
                 queryUserInprogress: true,
                 queryUserError: null,
+                users: []
             }))
             .addCase(queryGithubUsersThunk.fulfilled, (state, { payload }) => ({
                 ...state,

@@ -1,22 +1,47 @@
 import { ChangeEvent } from 'react';
+import IconSearch from '../Icons/IconSearch';
+import Button from '../Button/Button';
 
 type SearchInputProps = {
   name: string;
+  queryInProgress: boolean;
   value: string;
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void;
 };
 
 const SearchInput = (props: SearchInputProps) => {
-  const { name, onChange, value } = props;
+  const { name, onChange, value, queryInProgress } = props;
 
   return (
     <div>
-      <input
-        onChange={onChange}
-        name={name}
-        value={value}
-        className='py-2 px-3 outline-none rounded-lg border-red-300 border-[1px]'
-      />
+      <div>
+        <label
+          htmlFor='default-search'
+          className='mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white'>
+          Search
+        </label>
+        <div className='relative'>
+          <div className='absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none'>
+            <IconSearch />
+          </div>
+          <input
+            onChange={onChange}
+            name={name}
+            value={value}
+            type='search'
+            id='default-search'
+            className='outline-none block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+            placeholder='Find github user all around the world ...'
+            required
+          />
+          <Button
+            type='submit'
+            isLoading={queryInProgress}
+            className='absolute end-2.5 top-1/2 translate-y-[-50%]'>
+            Search
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
