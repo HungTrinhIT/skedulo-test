@@ -9,6 +9,7 @@ import ManageUserList from '../../components/ManageUserList/ManageUserList';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import SearchUserForm from '../../components/SearchUserForm/SearchUserForm';
 import SearchInput from '../../components/SearchInput/SearchInput';
+import { isMobile } from 'react-device-detect';
 
 const Homepage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -17,6 +18,8 @@ const Homepage = () => {
   );
   const dispatch = useAppDispatch();
   const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const isMobileDevice = isMobile;
 
   const handleQueryGithubUser = async () => {
     dispatch(queryGithubUsersThunk(searchTerm));
@@ -35,6 +38,10 @@ const Homepage = () => {
 
     setSearchTerm('');
     handleQueryGithubUser();
+
+    if (isMobileDevice && searchInputRef.current) {
+      searchInputRef.current?.blur();
+    }
   };
 
   const handleSearchTermChange = (e: ChangeEvent<HTMLInputElement>) => {

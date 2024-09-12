@@ -38,7 +38,7 @@ const ManageUserList = (props: ManageUserListProps) => {
   if (queryUserError) {
     return (
       <div
-        className='p-4  my-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400'
+        className='p-4 my-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400'
         role='alert'>
         <span className='font-medium'>{queryUserError.message}</span>
       </div>
@@ -74,7 +74,7 @@ const ManageUserList = (props: ManageUserListProps) => {
               <span>Clear data</span>
             </div>
           </div>
-          <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
+          <div className='mb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4'>
             {users.map((user) => (
               <GithubUserCard data={user} key={user.id} />
             ))}
