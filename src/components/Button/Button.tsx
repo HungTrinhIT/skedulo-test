@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { ButtonHTMLAttributes } from 'react';
+
 import IconLoading from '../Icons/IconLoading';
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
