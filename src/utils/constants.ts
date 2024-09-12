@@ -1,0 +1,1 @@
+export const DEFAULT_USER_PER_PAGE_PARAM = 100;

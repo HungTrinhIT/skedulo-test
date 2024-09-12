@@ -1,7 +1,12 @@
-import IconNoResults from '../../Icons/IconNoResults';
-import Button from '../Button';
+import IconNoResults from '../Icons/IconNoResults';
+import Button from '../Button/Button';
 
-const NoResult = () => {
+type NoResultProps = {
+  handleTriggerFocusSearchInputField: () => void;
+};
+
+const NoResult = (props: NoResultProps) => {
+  const { handleTriggerFocusSearchInputField } = props;
   return (
     <div className='w-full flex items-center justify-center pt-[100px]'>
       <div className='w-full lg:w-1/2'>
@@ -14,7 +19,9 @@ const NoResult = () => {
             Let's explore the github universal <b>now</b>!
           </p>
           <div className='flex gap-3'>
-            <Button>Get's started</Button>
+            <Button onClick={handleTriggerFocusSearchInputField}>
+              Get's started
+            </Button>
           </div>
         </div>
       </div>

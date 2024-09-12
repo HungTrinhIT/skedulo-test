@@ -1,39 +1,18 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../../redux/store';
-import { queryGithubUsersThunk } from '../../redux/slices/githubUsers.slice';
-import SearchInput from '../SearchInput/SearchInput';
+import { FormEvent, PropsWithChildren } from 'react';
 
-const SearchUserForm = () => {
-  const [searchTerm, setSearchTerm] = useState('');
-  const queryUserInprogress = useAppSelector(
-    (state) => state.githubUser.queryUserInprogress
-  );
-  const dispatch = useAppDispatch();
+type SearchUserFormProps = PropsWithChildren & {
+  handleSubmitForm: () => void;
+};
 
-  const handleQueryGithubUser = async () => {
-    if (!searchTerm) return;
+const SearchUserForm = (props: SearchUserFormProps) => {
+  const { handleSubmitForm, children } = props;
 
-    dispatch(queryGithubUsersThunk(searchTerm));
-  };
-
-  const handleSubmitForm = (e: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleQueryGithubUser();
+    handleSubmitForm();
   };
 
-  const handleSearchTermChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
-  };
-  return (
-    <form onSubmit={handleSubmitForm}>
-      <SearchInput
-        name='searchTerm'
-        value={searchTerm}
-        queryInProgress={queryUserInprogress}
-        onChange={handleSearchTermChange}
-      />
-    </form>
-  );
+  return <form onSubmit={handleSubmit}>{children}</form>;
 };
 
 export default SearchUserForm;
