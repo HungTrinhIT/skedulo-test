@@ -13,6 +13,8 @@ import SearchUserForm from '../../components/SearchUserForm/SearchUserForm';
 import SearchInput from '../../components/SearchInput/SearchInput';
 import { QUERY_USER_DEBOUNCE_TIMEOUT } from '../../utils/constants';
 
+const MINIMUM_SEARCH_TERM_LETTER_TO_QUERY = 3;
+
 const Homepage = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const queryUserInprogress = useAppSelector(
@@ -66,7 +68,7 @@ const Homepage = () => {
       return;
     }
 
-    if (countSearchTermLetter >= 3) {
+    if (countSearchTermLetter >= MINIMUM_SEARCH_TERM_LETTER_TO_QUERY) {
       handleSubmitForm();
     }
   }, [searchTerm]);
