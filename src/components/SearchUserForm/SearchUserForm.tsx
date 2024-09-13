@@ -1,7 +1,7 @@
 import { FormEvent, PropsWithChildren } from 'react';
 
 type SearchUserFormProps = PropsWithChildren & {
-  handleSubmitForm: () => void;
+  handleSubmitForm?: () => void;
 };
 
 const SearchUserForm = (props: SearchUserFormProps) => {
@@ -9,7 +9,10 @@ const SearchUserForm = (props: SearchUserFormProps) => {
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    handleSubmitForm();
+
+    if (handleSubmitForm) {
+      handleSubmitForm();
+    }
   };
 
   return <form onSubmit={handleSubmit}>{children}</form>;

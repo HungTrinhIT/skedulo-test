@@ -1,1 +1,2 @@
 export const DEFAULT_USER_PER_PAGE_PARAM = 100;
+export const QUERY_USER_DEBOUNCE_TIMEOUT = 300;

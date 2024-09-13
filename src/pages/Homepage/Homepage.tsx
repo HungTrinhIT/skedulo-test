@@ -1,4 +1,6 @@
-import { ChangeEvent, useRef, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
+import debounce from 'lodash/debounce';
 
 import { useAppDispatch, useAppSelector } from '../../redux/store';
 import {
@@ -9,7 +11,7 @@ import ManageUserList from '../../components/ManageUserList/ManageUserList';
 import PageLayout from '../../components/PageLayout/PageLayout';
 import SearchUserForm from '../../components/SearchUserForm/SearchUserForm';
 import SearchInput from '../../components/SearchInput/SearchInput';
-import { isMobile } from 'react-device-detect';
+import { QUERY_USER_DEBOUNCE_TIMEOUT } from '../../utils/constants';
 
 const Homepage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -21,9 +23,12 @@ const Homepage = () => {
 
   const isMobileDevice = isMobile;
 
-  const handleQueryGithubUser = async () => {
-    dispatch(queryGithubUsersThunk(searchTerm));
-  };
+  const handleQueryGithubUser = useCallback(
+    debounce((searchValue: string) => {
+      return dispatch(queryGithubUsersThunk(searchValue));
+    }, QUERY_USER_DEBOUNCE_TIMEOUT),
+    [dispatch]
+  );
 
   const handleClearSearchData = () => {
     setSearchTerm('');
@@ -36,8 +41,7 @@ const Homepage = () => {
       return;
     }
 
-    setSearchTerm('');
-    handleQueryGithubUser();
+    handleQueryGithubUser(searchTerm);
 
     if (isMobileDevice && searchInputRef.current) {
       searchInputRef.current?.blur();
@@ -54,15 +58,29 @@ const Homepage = () => {
     }
   };
 
+  useEffect(() => {
+    const countSearchTermLetter = searchTerm.length;
+
+    if (countSearchTermLetter === 0) {
+      handleClearSearchData();
+      return;
+    }
+
+    if (countSearchTermLetter >= 3) {
+      handleSubmitForm();
+    }
+  }, [searchTerm]);
+
   return (
     <PageLayout className='pt-10'>
-      <SearchUserForm handleSubmitForm={handleSubmitForm}>
+      <SearchUserForm>
         <SearchInput
           name='searchTerm'
           value={searchTerm}
           queryInProgress={queryUserInprogress}
           onChange={handleSearchTermChange}
           ref={searchInputRef}
+          hideSubmitButton
         />
       </SearchUserForm>
       <ManageUserList
