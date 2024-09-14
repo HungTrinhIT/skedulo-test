@@ -1,5 +1,4 @@
 import { ChangeEvent, useCallback, useEffect, useRef, useState } from 'react';
-import { isMobile } from 'react-device-detect';
 import debounce from 'lodash/debounce';
 
 import { useAppDispatch, useAppSelector } from '../../redux/store';
@@ -23,8 +22,6 @@ const Homepage = () => {
   const dispatch = useAppDispatch();
   const searchInputRef = useRef<HTMLInputElement>(null);
 
-  const isMobileDevice = isMobile;
-
   const handleQueryGithubUser = useCallback(
     debounce((searchValue: string) => {
       return dispatch(queryGithubUsersThunk(searchValue));
@@ -44,10 +41,6 @@ const Homepage = () => {
     }
 
     handleQueryGithubUser(searchTerm);
-
-    if (isMobileDevice && searchInputRef.current) {
-      searchInputRef.current?.blur();
-    }
   };
 
   const handleSearchTermChange = (e: ChangeEvent<HTMLInputElement>) => {
